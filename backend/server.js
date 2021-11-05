@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import products from './data/products.js';
 // NPM RUN SERVER
 
+// VIDEO 2 CONNECTING TO DATABASE
 
 dotenv.config();
 

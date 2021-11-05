@@ -26,13 +26,15 @@ router.get('/', asyncHandler(async (req, res) => {
 // @route     GET /api/products/:id
 // @access    Public
 router.get('/:id', asyncHandler(async (req, res) => {
-  const product = await Product.findById(req.params._id)
+  // if theres an error with id ue ._id
+  const product = await Product.findById(req.params.id)
 
   // check if theres a product
   if (product) {
     res.json(product)
   } else {
-    res.status(404).json({ message: 'Product not found' })
+    res.status(404)
+    throw new Error('Product not found')
   }
 
 }))
@@ -43,4 +45,3 @@ router.get('/:id', asyncHandler(async (req, res) => {
 
 
 export default router
-

@@ -15,3 +15,4 @@ router.route('/:id').get(getProductById)
 
 
 export default router
+// npm run server VIDEO 2 USER AUTHENTICATION ENDPOINT

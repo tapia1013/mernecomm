@@ -1,4 +1,5 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
 
 
 
@@ -31,7 +32,11 @@ const userSchema = mongoose.Schema(
   }
 )
 
-
+// password authentication with plaintext pw and match it with the bcrypt pw that is hashed
+userSchema.methods.matchPasswords = async function (enteredPassword) {
+  // compare let us cmpare plain text pw to bcrypt hashed pw
+  return await bcrypt.compare(enteredPassword, this.password)
+}
 
 const User = mongoose.model('User', userSchema)
 

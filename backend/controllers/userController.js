@@ -29,3 +29,4 @@ const authUser = asyncHandler(async (req, res) => {
 
 
 export { authUser }
+// VIDEO 3 BRIEF EXPLA OF JWT 1:00s

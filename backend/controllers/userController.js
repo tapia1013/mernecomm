@@ -1,4 +1,5 @@
 import asyncHandler from 'express-async-handler';
+import generateToken from '../utils/generateTokens.js';
 import User from '../models/userModel.js';
 
 
@@ -17,16 +18,15 @@ const authUser = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      toke: null,
+      token: generateToken(user._id),
     })
   } else {
     res.status(401)
     throw new Error('Invalid email or password')
   }
 
-})
+});
 
 
 
-export { authUser }
-// VIDEO 3 BRIEF EXPLA OF JWT 1:00s
+export { authUser };

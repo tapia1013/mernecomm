@@ -7,7 +7,6 @@ import Order from '../models/orderModel.js';
 // @desc      Create new order
 // @route     POST /api/orders
 // @access    Private
-
 const addOrderItems = asyncHandler(async (req, res) => {
   const {
     orderItems,
@@ -72,5 +71,36 @@ const getOrderById = asyncHandler(async (req, res) => {
 
 
 
+// @desc      Update order to paid
+// @route     GET /api/orders/:id/pay
+// @access    Private
+const updateOrderToPaid = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id)
 
-export { addOrderItems, getOrderById }
+  if (order) {
+    order.isPaid = true;
+    order.paidAt = Date.now();
+    order.paymentResult = {
+      id: req.body.id,
+      status: req.body.status,
+      update_time: req.body.update_time,
+      email: req.body.pair.email_address
+    }
+
+    const updatedOrder = await order.save();
+
+    res.json(updatedOrder)
+  } else {
+    res.status(404)
+    throw new Error('Order not found!')
+  }
+
+})
+
+
+
+
+
+
+
+export { addOrderItems, getOrderById, updateOrderToPaid }
